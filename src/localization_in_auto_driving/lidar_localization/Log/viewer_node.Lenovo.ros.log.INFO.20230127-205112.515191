@@ -1,0 +1,6 @@
+Log file created at: 2023/01/27 20:51:12
+Running on machine: Lenovo
+Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
+I0127 20:51:12.281723 515191 viewer.cpp:182] 地图保存完成，地址是：
+/home/ros/Programs/localization_tag14/src/localization_in_auto_driving/lidar_localization/slam_data/map
+

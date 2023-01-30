@@ -1,0 +1,17 @@
+Log file created at: 2023/01/27 20:19:22
+Running on machine: Lenovo
+Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
+I0127 20:19:22.206993 515188 g2o_graph_optimizer.cpp:41] 
+------ 完成第 1 次后端优化 -------
+顶点数：950, 边数： 1899
+迭代次数： 18/512
+用时：0.116163
+优化前后误差变化：198840--->71.4733
+
+I0127 20:51:23.238488 515188 g2o_graph_optimizer.cpp:41] 
+------ 完成第 2 次后端优化 -------
+顶点数：1897, 边数： 3828
+迭代次数： 21/512
+用时：0.369869
+优化前后误差变化：603849--->77.4821
+

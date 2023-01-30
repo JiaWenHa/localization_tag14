@@ -1,0 +1,23 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"mutex": "cpp",
+			"shared_mutex": "cpp",
+			"condition_variable": "cpp"
+		},
+		"python.autoComplete.extraPaths": [
+			"/home/ros/Programs/localization_tag14/devel/lib/python3/dist-packages",
+			"/home/ros/ws_livox/devel/lib/python3/dist-packages",
+			"/opt/ros/noetic/lib/python3/dist-packages"
+		]
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": []
+	}
+}

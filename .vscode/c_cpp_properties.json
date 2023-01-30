@@ -1,0 +1,22 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${default}",
+                "/usr/include/pcl-1.12",
+                "/opt/ros/noetic/include/**",
+                "/usr/include/**",
+                "${workspaceFolder}/src/localization_in_auto_driving/lidar_localization/include/**",
+                "${workspaceFolder}/src/localization_in_auto_driving/lidar_localization/third_party/GeographicLib/include/**",
+                "${workspaceFolder}/build/localization_in_auto_driving/lidar_localization/include"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/clang",
+            "cStandard": "c17",
+            "cppStandard": "c++14",
+            "intelliSenseMode": "linux-clang-x64"
+        }
+    ],
+    "version": 4
+}

@@ -1,0 +1,7 @@
+Log file created at: 2023/01/28 10:12:31
+Running on machine: Lenovo
+Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
+I0128 10:12:31.903127 538206 matching.cpp:87] load global map size:966898
+I0128 10:12:31.976531 538206 matching.cpp:90] filtered global map size:966898
+I0128 10:12:32.064942 538206 matching.cpp:107] new local map:-150,150,-150,150,-150,150
+
