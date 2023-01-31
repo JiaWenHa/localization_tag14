@@ -1,7 +1,22 @@
 /*
- * @Description: 数据预处理模块，包括时间同步、点云去畸变等
- * @Author: Ren Qian
- * @Date: 2020-02-10 08:38:42
+ * @Author: jia
+ * @Date: 2023-01-27 19:33:59
+ * @LastEditors: jia
+ * @LastEditTime: 2023-01-31 13:13:25
+ * @Description: 数据预处理模块
+ * 功能：
+ *  1）接收各传感器信息
+ *  2）传感器数据时间同步
+ *  3）点云运动畸变补偿
+ *  4）传感器信息统一坐标系
+ * 输入：
+ *  1）GNSS组合导航位置、姿态、角速度、线速度等
+ *  2）雷达点云信息
+ *  3）雷达和IMU相对坐标系
+ * 输出：
+ *  1）GNSS组合导航位置、姿态
+ *  2）畸变补偿后的点云
+ * 备注：输出的信息均是经过时间同步的，时间戳已保持一致。
  */
 #include "lidar_localization/data_pretreat/data_pretreat_flow.hpp"
 
@@ -15,7 +30,8 @@ DataPretreatFlow::DataPretreatFlow(ros::NodeHandle& nh, std::string cloud_topic)
     imu_sub_ptr_ = std::make_shared<IMUSubscriber>(nh, "/kitti/oxts/imu", 1000000);
     velocity_sub_ptr_ = std::make_shared<VelocitySubscriber>(nh, "/kitti/oxts/gps/vel", 1000000);
     gnss_sub_ptr_ = std::make_shared<GNSSSubscriber>(nh, "/kitti/oxts/gps/fix", 1000000);
-    lidar_to_imu_ptr_ = std::make_shared<TFListener>(nh, "/imu_link", "/velo_link");
+    // 订阅的是 lidar 坐标系变换到 imu 坐标系的坐标变换
+    lidar_to_imu_ptr_ = std::make_shared<TFListener>(nh,  "/velo_link", "/imu_link");
     // publisher
     cloud_pub_ptr_ = std::make_shared<CloudPublisher>(nh, cloud_topic, "/velo_link", 100);
     gnss_pub_ptr_ = std::make_shared<OdometryPublisher>(nh, "/synced_gnss", "map", "/velo_link", 100);

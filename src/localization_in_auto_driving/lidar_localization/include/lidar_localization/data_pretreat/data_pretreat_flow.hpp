@@ -1,7 +1,22 @@
 /*
- * @Description: 数据预处理模块，包括时间同步、点云去畸变等
- * @Author: Ren Qian
- * @Date: 2020-02-10 08:31:22
+ * @Author: jia
+ * @Date: 2023-01-27 19:33:59
+ * @LastEditors: jia
+ * @LastEditTime: 2023-01-31 13:03:32
+ * @Description: 数据预处理模块
+ * 功能：
+ *  1）接收各传感器信息
+ *  2）传感器数据时间同步
+ *  3）点云运动畸变补偿
+ *  4）传感器信息统一坐标系
+ * 输入：
+ *  1）GNSS组合导航位置、姿态、角速度、线速度等
+ *  2）雷达点云信息
+ *  3）雷达和IMU相对坐标系
+ * 输出：
+ *  1）GNSS组合导航位置、姿态
+ *  2）畸变补偿后的点云
+ * 备注：输出的信息均是经过时间同步的，时间戳已保持一致。
  */
 #ifndef LIDAR_LOCALIZATION_DATA_PRETREAT_DATA_PRETREAT_FLOW_HPP_
 #define LIDAR_LOCALIZATION_DATA_PRETREAT_DATA_PRETREAT_FLOW_HPP_

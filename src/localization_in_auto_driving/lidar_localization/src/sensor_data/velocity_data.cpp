@@ -53,17 +53,20 @@ bool VelocityData::SyncData(std::deque<VelocityData>& UnsyncedData, std::deque<V
 
 void VelocityData::TransformCoordinate(Eigen::Matrix4f transform_matrix) {
     Eigen::Matrix4d matrix = transform_matrix.cast<double>();
-    Eigen::Matrix3d t_R = matrix.block<3,3>(0,0);
+    Eigen::Matrix3d t_R = matrix.block<3,3>(0,0);//单独取出旋转矩阵
+    // 获得角速度向量 和 线速度向量
     Eigen::Vector3d w(angular_velocity.x, angular_velocity.y, angular_velocity.z);
     Eigen::Vector3d v(linear_velocity.x, linear_velocity.y, linear_velocity.z);
+    // 获得 雷达 的角速度和线速度
     w = t_R * w;
     v = t_R * v;
 
+    // 取出平移向量，然后用 v = w x r 计算出 一段时间内的 线速度 变化量
     Eigen::Vector3d r(matrix(0,3), matrix(1,3), matrix(2,3));
     Eigen::Vector3d delta_v;
     delta_v(0) = w(1) * r(2) - w(2) * r(1);
     delta_v(1) = w(2) * r(0) - w(0) * r(2);
-    delta_v(2) = w(1) * r(1) - w(1) * r(0);
+    delta_v(2) = w(0) * r(1) - w(1) * r(0);
     v = v + delta_v;
 
     angular_velocity.x = w(0);

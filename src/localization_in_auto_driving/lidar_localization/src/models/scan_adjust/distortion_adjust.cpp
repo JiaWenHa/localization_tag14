@@ -29,9 +29,6 @@ void DistortionAdjust::SetMotionInfo(float scan_period, VelocityData velocity_da
  *      旋转再平移，也可以用4*4矩阵一次性计算。
 */
 /**
- * 函数功能：点云去畸变
-*/
-/**
  * @description: 激光雷达点云去畸变
  * @param {CLOUD_PTR&} input_cloud_ptr: 原始点云
  * @param {CLOUD_PTR&} output_cloud_ptr: 去畸变后的点云
