@@ -16,7 +16,7 @@ NDTRegistration::NDTRegistration(const YAML::Node& node)
     float step_size = node["step_size"].as<float>();
     float trans_eps = node["trans_eps"].as<float>();
     int max_iter = node["max_iter"].as<int>();
-
+    //设置NDT 配准的相关参数
     SetRegistrationParam(res, step_size, trans_eps, max_iter);
 }
 
@@ -26,11 +26,19 @@ NDTRegistration::NDTRegistration(float res, float step_size, float trans_eps, in
     SetRegistrationParam(res, step_size, trans_eps, max_iter);
 }
 
+/**
+ * @description: 设置 NDT 配准的相关参数
+ * @param {float} res：NDT网络结构的分辨率
+ * @param {float} step_size：线搜索的最大步长
+ * @param {float} trans_eps：为终止条件设置的最小转换差异
+ * @param {int} max_iter：设置匹配迭代的最大次数
+ * @return {*}
+ */
 bool NDTRegistration::SetRegistrationParam(float res, float step_size, float trans_eps, int max_iter) {
-    ndt_ptr_->setResolution(res);
-    ndt_ptr_->setStepSize(step_size);
-    ndt_ptr_->setTransformationEpsilon(trans_eps);
-    ndt_ptr_->setMaximumIterations(max_iter);
+    ndt_ptr_->setResolution(res);//设置NDT网络结构的分辨率
+    ndt_ptr_->setStepSize(step_size); //为线搜索设置最大步长
+    ndt_ptr_->setTransformationEpsilon(trans_eps);//为终止条件设置最小转换差异
+    ndt_ptr_->setMaximumIterations(max_iter);//设置匹配迭代的最大次数
 
     std::cout << "NDT 的匹配参数为：" << std::endl
               << "res: " << res << ", "

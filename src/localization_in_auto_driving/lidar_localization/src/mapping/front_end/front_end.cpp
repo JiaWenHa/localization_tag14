@@ -1,7 +1,10 @@
 /*
+ * @Author: jia
+ * @Date: 2023-01-27 19:33:59
+ * @LastEditors: jia
+ * @LastEditTime: 2023-02-02 18:19:53
  * @Description: 前端里程计算法
- * @Author: Ren Qian
- * @Date: 2020-02-04 18:53:06
+ * 
  */
 #include "lidar_localization/mapping/front_end/front_end.hpp"
 
@@ -21,11 +24,13 @@ namespace lidar_localization {
 FrontEnd::FrontEnd()
     :local_map_ptr_(new CloudData::CLOUD()) {
     
+    //根据yaml中的数据初始化相应的参数
     InitWithConfig();
 }
 
 bool FrontEnd::InitWithConfig() {
     std::string config_file_path = WORK_SPACE_PATH + "/config/mapping/front_end.yaml";
+    // Loads the input file as a single YAML document.
     YAML::Node config_node = YAML::LoadFile(config_file_path);
 
     std::cout << "-----------------前端初始化-------------------" << std::endl;
@@ -37,6 +42,11 @@ bool FrontEnd::InitWithConfig() {
     return true;
 }
 
+/**
+ * @description: 初始化 雷达点云关键帧距离 和 局部地图帧的数量
+ * @param {Node&} config_node：YAML文件节点
+ * @return {*}
+ */
 bool FrontEnd::InitParam(const YAML::Node& config_node) {
     key_frame_distance_ = config_node["key_frame_distance"].as<float>();
     local_frame_num_ = config_node["local_frame_num"].as<int>();
@@ -44,6 +54,12 @@ bool FrontEnd::InitParam(const YAML::Node& config_node) {
     return true;
 }
 
+/**
+ * @description: 根据 点云配准的方法 设置其对应的参数
+ * @param <RegistrationInterface>& registration_ptr：用于保存点云配准方法
+ * @param {Node&} config_node：YAML node节点
+ * @return {*}
+ */
 bool FrontEnd::InitRegistration(std::shared_ptr<RegistrationInterface>& registration_ptr, const YAML::Node& config_node) {
     std::string registration_method = config_node["registration_method"].as<std::string>();
     std::cout << "前端选择的点云匹配方式为：" << registration_method << std::endl;
@@ -58,6 +74,12 @@ bool FrontEnd::InitRegistration(std::shared_ptr<RegistrationInterface>& registra
     return true;
 }
 
+/**
+ * @description: 初始化滤波方法 和 滤波参数
+ * @param {string} filter_user
+ * @param {Node&} config_node
+ * @return {*}
+ */
 bool FrontEnd::InitFilter(std::string filter_user, std::shared_ptr<CloudFilterInterface>& filter_ptr, const YAML::Node& config_node) {
     std::string filter_mothod = config_node[filter_user + "_filter"].as<std::string>();
     std::cout << "前端" << filter_user << "选择的滤波方法为：" << filter_mothod << std::endl;
@@ -74,6 +96,12 @@ bool FrontEnd::InitFilter(std::string filter_user, std::shared_ptr<CloudFilterIn
     return true;
 }
 
+/**
+ * @description: 输入点云数据，输出其位姿变换矩阵，并更新关键帧
+ * @param {CloudData&} cloud_data：输入点云数据
+ * @param {Matrix4f&} cloud_pose：输出点云的位姿，配准是与局部地图配准的。
+ * @return {*}
+ */
 bool FrontEnd::Update(const CloudData& cloud_data, Eigen::Matrix4f& cloud_pose) {
     current_frame_.cloud_data.time = cloud_data.time;
     std::vector<int> indices;
@@ -96,7 +124,7 @@ bool FrontEnd::Update(const CloudData& cloud_data, Eigen::Matrix4f& cloud_pose) 
         return true;
     }
 
-    // 不是第一帧，就正常匹配
+    // 不是第一帧，就正常匹配，匹配用的预测位置由雷达点云得到
     CloudData::CLOUD_PTR result_cloud_ptr(new CloudData::CLOUD());
     registration_ptr_->ScanMatch(filtered_cloud_ptr, predict_pose, result_cloud_ptr, current_frame_.pose);
     cloud_pose = current_frame_.pose;
@@ -122,6 +150,11 @@ bool FrontEnd::SetInitPose(const Eigen::Matrix4f& init_pose) {
     return true;
 }
 
+/**
+ * @description: 用新的关键帧 更新 局部地图，并将局部地图设置为配准的目标点云
+ * @param {Frame&} new_key_frame：关键帧
+ * @return {*}
+ */
 bool FrontEnd::UpdateWithNewFrame(const Frame& new_key_frame) {
     Frame key_frame = new_key_frame;
     // 这一步的目的是为了把关键帧的点云保存下来

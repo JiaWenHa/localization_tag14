@@ -1,0 +1,18 @@
+Log file created at: 2023/02/01 18:40:07
+Running on machine: Lenovo
+Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
+I0201 18:40:07.444908 32446 cloud_subscriber.cpp:20] cloud frame id is:velo_link
+I0201 18:40:07.801192 32446 cloud_subscriber.cpp:20] cloud frame id is:velo_link
+I0201 18:40:08.142120 32446 cloud_subscriber.cpp:20] cloud frame id is:velo_link
+I0201 18:40:08.486348 32446 cloud_subscriber.cpp:20] cloud frame id is:velo_link
+I0201 18:40:08.837414 32446 cloud_subscriber.cpp:20] cloud frame id is:velo_link
+I0201 18:40:09.184113 32446 cloud_subscriber.cpp:20] cloud frame id is:velo_link
+I0201 18:40:09.526317 32446 cloud_subscriber.cpp:20] cloud frame id is:velo_link
+I0201 18:40:09.869300 32446 cloud_subscriber.cpp:20] cloud frame id is:velo_link
+I0201 18:40:10.212512 32446 cloud_subscriber.cpp:20] cloud frame id is:velo_link
+I0201 18:40:10.567826 32446 cloud_subscriber.cpp:20] cloud frame id is:velo_link
+I0201 18:40:10.901131 32446 cloud_subscriber.cpp:20] cloud frame id is:velo_link
+I0201 18:40:11.251356 32446 cloud_subscriber.cpp:20] cloud frame id is:velo_link
+I0201 18:40:11.592406 32446 cloud_subscriber.cpp:20] cloud frame id is:velo_link
+I0201 18:40:11.943641 32446 cloud_subscriber.cpp:20] cloud frame id is:velo_link
+I0201 18:40:12.288036 32446 cloud_subscriber.cpp:20] cloud frame id is:velo_link

@@ -12,6 +12,11 @@ TFListener::TFListener(ros::NodeHandle& nh, std::string base_frame_id, std::stri
     :nh_(nh), base_frame_id_(base_frame_id), child_frame_id_(child_frame_id) {
 }
 
+/**
+ * @description: 获取 TF 数据
+ * @param {Matrix4f&} transform_matrix：用于存储获取到的变换矩阵
+ * @return {*}
+ */
 bool TFListener::LookupData(Eigen::Matrix4f& transform_matrix) {
     try {
         tf::StampedTransform transform;

@@ -17,6 +17,8 @@ CloudSubscriber::CloudSubscriber(ros::NodeHandle& nh, std::string topic_name, si
 void CloudSubscriber::msg_callback(const sensor_msgs::PointCloud2::ConstPtr& cloud_msg_ptr) {
     buff_mutex_.lock();
     CloudData cloud_data;
+    // LOG(INFO) << "cloud frame id is:" << cloud_msg_ptr->header.frame_id << std::endl;
+
     cloud_data.time = cloud_msg_ptr->header.stamp.toSec();
     pcl::fromROSMsg(*cloud_msg_ptr, *(cloud_data.cloud_ptr));
     new_cloud_data_.push_back(cloud_data);

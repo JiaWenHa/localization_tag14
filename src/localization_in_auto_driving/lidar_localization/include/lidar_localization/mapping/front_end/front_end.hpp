@@ -45,6 +45,7 @@ class FrontEnd {
     std::deque<Frame> local_map_frames_;
 
     CloudData::CLOUD_PTR local_map_ptr_;
+    // 关键帧是带点云位姿的点云数据
     Frame current_frame_;
 
     Eigen::Matrix4f init_pose_ = Eigen::Matrix4f::Identity();
